@@ -1,0 +1,35 @@
+---
+version: 0.2
+
+env:
+  variables:
+    key: "value"
+
+phases:
+  install:
+    runtime-versions:
+      java: openjdk8
+    commands:
+      - apt-get update -y
+      - apt-get install -y maven
+      
+  build:
+    commands:
+      - echo Build started on `date`
+      - mvn test
+  pre_build:
+    commands:
+      - echo This is pre_build
+  build:
+    commands:
+      - echo Starting build `date`
+      - mvn clean package
+  post_build:
+    commands:
+      - echo Build completed on `date`
+
+artifacts:
+  files:
+    - target/springboot-rds-appointment.jar
+
+discard-paths: yes
